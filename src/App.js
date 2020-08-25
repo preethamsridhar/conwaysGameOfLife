@@ -2,8 +2,8 @@ import React, {useState } from "react";
 import Game from './Game';
 
 export default function App() {
-  const [hsize, setHSize] = useState(10);
-  const [vsize, setVSize] = useState(10);
+  const [hsize, setHSize] = useState(40);
+  const [vsize, setVSize] = useState(20);
 
   const sizeChangeHandler = (event) => {
     event.preventDefault();

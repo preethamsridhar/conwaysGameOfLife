@@ -4,25 +4,24 @@ import Block from './Block';
 export default function Index (props) {
 
   const [blocks, setBlocks] = useState([]);
+  console.log("Index -> blocks", blocks)
 
   useEffect(() => {
-    let tempBlocks = []
+    
+    let tempBlocks = [];
     for (let i = 0 ; i < props.vsize; i++ ) {
+      let rows = [];
       for (let j = 0; j < props.hsize; j++ ) {
-        tempBlocks.push(
-          <Block 
-            key={`${i}+${j}`} 
-            x={i} y={j} 
-            {...props}
-          />);
+        rows.push(0)
       }
-      tempBlocks.push(<br />);
+      tempBlocks.push(rows);
     }
   setBlocks(tempBlocks);
   
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    props.size, 
+    props.vsize, 
+    props.hsize, 
     props.blockHeight, 
     props.blockWidth
   ])
@@ -31,8 +30,23 @@ export default function Index (props) {
     <div style={{textAlign: 'center'}}>
       {
         blocks.length > 0 
-        ? blocks.map( block => block)
-        : null  
+        ? 
+        blocks.map((blockRow, i) => {
+          return (
+            <div>
+              {
+                blockRow.map((block, j) => <Block
+                    key={String(i) + String(j)}
+                    blockWidth={props.blockWidth}
+                    blockHeight={props.blockHeight}
+                    {...props}
+                  ></Block> 
+                )
+              }
+            </div>
+          )
+        })
+        : null
       }
     </div>
   )

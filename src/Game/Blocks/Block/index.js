@@ -3,10 +3,16 @@ import styles from './styles.css';
 
 export default function Index(props) {
 
-  const [dead, setDead] = useState(false);
+  const [alive, setAlive] = useState(false);
 
-  function toggleDead() {
-    setDead(!dead)
+  function toggleAlive() {
+    if (!alive) {
+      props.addLiveBlock(props.x, props.y);
+    } 
+    else {
+      props.removeLiveBlock(props.x, props.y);
+    }
+    setAlive(!alive)
   }
 
   return (
@@ -14,11 +20,13 @@ export default function Index(props) {
       style ={{
         width: props.blockWidth,
         height: props.blockHeight,
-        background: dead ? 'radial-gradient(circle, rgba(171,0,255,1) 0%, rgba(40,26,117,1) 49%, rgba(2,0,36,1) 90%)' : null
+        // background: alive ? 'radial-gradient(circle, rgba(171,0,255,1) 0%, rgba(40,26,117,1) 49%, rgba(2,0,36,1) 90%)' : null
+        background: alive ? 'grey' : null
       }}
       className="Block"
-      onClick={toggleDead}
+      onClick={toggleAlive}
     >
+      {props.x} {props.y}
     </div>
   )
 }
