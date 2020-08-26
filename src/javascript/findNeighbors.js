@@ -1,4 +1,5 @@
 export default function findNeighbors (x, y, width, height) {
+	
   	const neighbors = [] ; 
     const x_offset = [-1, -1, -1, 0, 0, 1, 1, 1];
   	const y_offset = [-1, 0, 1, -1, 1, -1, 0, 1];
